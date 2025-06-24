@@ -1,13 +1,14 @@
-FROM golang:latest
+FROM golang:1.23-alpine
 
 WORKDIR /app
 
-COPY . .
-
+COPY go.mod ./
 RUN go mod download
 
-RUN go build -o /go/bin/service_1 ./
+COPY . /app/
+
+RUN go build -v -o service_1 .
 
 EXPOSE  8001
 
-CMD [ "./service_1" ]
+CMD ["./service_1"]

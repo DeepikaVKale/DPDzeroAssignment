@@ -2,6 +2,8 @@ FROM golang:1.24.4-alpine
 
 WORKDIR /app
 
+RUN apt-get update && apt-get install -y curl && rm -rf /v
+
 COPY go.mod ./
 RUN go mod download
 

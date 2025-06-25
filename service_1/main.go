@@ -20,6 +20,12 @@ func main() {
 		})
 	})
 
+	// NEW: /health endpoint for Docker healthcheck
+	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte("OK"))
+	})
+
 	log.Println("Service 1 listening on port 8001...")
 	if err := http.ListenAndServe(":8001", nil); err != nil {
 		log.Fatalf("Server failed: %v", err)
